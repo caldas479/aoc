@@ -1,7 +1,5 @@
-from curses.ascii import isdigit
-
 input_file = 'input.txt'
-line = []
+lines = []
 
 with open(input_file, 'r') as file:
     lines = file.readlines()
