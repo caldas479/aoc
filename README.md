@@ -1,6 +1,6 @@
 # ADVENT OF CODE 
 
-# AOC-2022
+
 <!--- advent_readme_stars table --->
 ## 2022 Results
 
@@ -20,7 +20,7 @@
 | [Day 12](https://adventofcode.com/2022/day/12) | ⭐ | ⭐ |
 | [Day 13](https://adventofcode.com/2022/day/13) | ⭐ | ⭐ |
 
-# AOC-2023
+
 <!--- advent_readme_stars table --->
 ## 2023 Results
 
