@@ -3,12 +3,15 @@ import sys
 
 lines = open(sys.argv[1]).read().strip().split('\n')
 hands = []
-values = {'A': 14, 'K': 13, 'Q':12, 'J': 1, 'T': 10}
+values = {'A': "13", 'K': "12", 'Q':"11", 'J': "0", 'T': "10"}
 
-for line in lines:
-    hand, bid = line.split(' ')
+def replace(hand):
+    if hand == "":
+        return [""]
+    return [ x + y for x in ("23456789TQKA" if hand[0] == "J" else hand[0]) for y in replace(hand[1:])]
+
+def classify(hand):
     cards = {}
-    h = []
     for card in hand:
         if card in values:
             card = values[card]
@@ -16,7 +19,7 @@ for line in lines:
         if card not in cards:
             cards[card] = 0
         cards[card] += 1
-        h += [card]     
+    t = 1
     count = cards.values()
     if len(cards) == 1:
         t = 7
@@ -27,13 +30,23 @@ for line in lines:
     elif len(cards) == 4:
         t = 2
     else:
-        t = 1   
-    hands += [(t,h,int(bid))]
+        t = 1 
+    return t
 
-sorted_hands = sorted(hands, key=lambda x: (x[0],x[1]))
+def best_classification(hand):
+    return max(map(classify, replace(hand)))
+
+def strength(hand):
+    return (best_classification(hand), [values.get(card,card) for card in hand])
+
+for line in lines:
+    hand, bid = line.split(' ')
+    hands += [(hand,int(bid))]
+
+sorted_hands = sorted(hands, key=lambda hand: strength(hand[0]))
 
 ans = 0
 for i,hand in enumerate(sorted_hands):
-    ans += (i+1)*hand[2]
+    ans += (i+1)*hand[1]
 
 print(ans)
