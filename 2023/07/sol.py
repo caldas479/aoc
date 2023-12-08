@@ -13,9 +13,6 @@ def replace(hand):
 def classify(hand):
     cards = {}
     for card in hand:
-        if card in values:
-            card = values[card]
-        card = int(card)
         if card not in cards:
             cards[card] = 0
         cards[card] += 1
@@ -33,11 +30,8 @@ def classify(hand):
         t = 1 
     return t
 
-def best_classification(hand):
-    return max(map(classify, replace(hand)))
-
 def strength(hand):
-    return (best_classification(hand), [values.get(card,card) for card in hand])
+    return (max(map(classify, replace(hand))), [values.get(card,card) for card in hand])
 
 for line in lines:
     hand, bid = line.split(' ')
