@@ -8,9 +8,7 @@ def get_mirror(grid):
         above = grid[:r][::-1]
         below = grid[r:]
         
-        above = above[:len(below)]
-        below = below[:len(above)]
-        if above == below:
+        if sum(sum(0 if a == b else 1 for a, b in zip(ra,rb)) for ra, rb in zip(above,below))==1:
             return r
     return 0
 
